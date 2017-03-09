@@ -1,4 +1,2 @@
 node_modules
-*.component.js
-*.module.js
-*.map
+build
