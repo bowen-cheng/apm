@@ -1,7 +1,7 @@
 <div class='panel panel-primary'>
     <div class='panel-heading'>
         {{ pageTitle }}
-    </div> 
+    </div>
 
     <!-- Filter the Products   -->
     <div class='panel-body'>
@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of products">
+                    <tr *ngFor="let product of products | productFilter : listFilter">
                         <td>
                             <img *ngIf="showImage"
                                 [src]="product.imageUrl"
