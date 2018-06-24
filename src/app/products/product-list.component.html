@@ -33,7 +33,15 @@
         </thead>
         <tbody>
         <tr *ngFor="let product of products">
-          <td><img alt="Product image here"></td>
+          <td><img alt="Product image here"
+                   title="{{product.productName}}"
+                   [src]="product.imageUrl"
+                   [style.width.px]="imageWidth"
+                   [style.margin.px]="imageMargin">
+            <!-- propertyName="{{...}}" This is interpolation -->
+            <!-- [propertyName]="..." This is property binding -->
+            <!-- In general, property binding is preferred unless the evaluation is complex -->
+          </td>
           <td>{{product.productName}}</td>
           <td>{{product.productCode}}</td>
           <td>{{product.releaseDate}}</td>
