@@ -50,9 +50,9 @@
             <!-- In general, property binding is preferred unless the evaluation is complex -->
           </td>
           <td>{{product.productName}}</td>
-          <td>{{product.productCode}}</td>
+          <td>{{product.productCode | uppercase}}</td>
           <td>{{product.releaseDate}}</td>
-          <td>{{product.price}}</td>
+          <td>{{product.price | currency}}</td>
           <td>{{product.starRating}}</td>
         </tr>
         </tbody>
