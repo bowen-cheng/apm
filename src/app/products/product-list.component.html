@@ -20,8 +20,11 @@
         <thead>
         <tr>
           <th>
-            <button class="btn btn-primary">
-              Show image
+            <button class="btn btn-primary"
+                    (click)="toggleImage()">
+              <!-- (eventName)="functionName()" -->
+              <!-- Event binding, a function in the component will be called once the event fires-->
+              {{isImageDisplayed ? "Hide" : "Show"}} image
             </button>
           </th>
           <th>Product</th>
@@ -34,6 +37,7 @@
         <tbody>
         <tr *ngFor="let product of products">
           <td><img alt="Product image here"
+                   *ngIf="isImageDisplayed"
                    title="{{product.productName}}"
                    [src]="product.imageUrl"
                    [style.width.px]="imageWidth"
