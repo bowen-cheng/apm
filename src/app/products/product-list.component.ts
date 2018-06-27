@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Product } from './product';
+
 @Component({
   selector: 'pm-products',
   templateUrl: './product-list.component.html'
@@ -10,7 +12,7 @@ export class ProductListComponent {
   imageWidth: number = 50;
   imageMargin: number = 2;
   isImageDisplayed: boolean = false;
-  products: any[] = [
+  products: Product[] = [
     {
       'productId': 1,
       'productName': 'Leaf Rake',
