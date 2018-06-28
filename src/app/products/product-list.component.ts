@@ -9,10 +9,11 @@ import { Product } from './product';
 })
 export class ProductListComponent implements OnInit {
   pageTitle: string = 'Product List';
-  filterText: string = 'cart';
+  _filterText: string;
   imageWidth: number = 50;
   imageMargin: number = 2;
   isImageDisplayed: boolean = false;
+  filteredProducts: Product[];
   products: Product[] = [
     {
       'productId': 1,
@@ -66,11 +67,29 @@ export class ProductListComponent implements OnInit {
     }
   ];
 
+  constructor() {
+    this.filteredProducts = this.products;
+  }
+
+  get filterText(): string {
+    return this._filterText;
+  }
+
+  set filterText(text: string) { // setters cannot have return types, not even "void"
+    this._filterText = text;
+    this.filteredProducts = this._filterText ? this.performFilter() : this.products;
+  }
+
   toggleImage(): void {
     this.isImageDisplayed = !this.isImageDisplayed;
   }
 
   ngOnInit(): void {
     console.log('Product list is initiated');
+  }
+
+  private performFilter(): Product[] {
+    const lowercase = this._filterText.toLocaleLowerCase();
+    return this.products.filter((value: Product) => value.productName.toLocaleLowerCase().indexOf(lowercase) !== -1);
   }
 }

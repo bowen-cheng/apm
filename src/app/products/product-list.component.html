@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of filteredProducts">
           <td><img alt="Product image here"
                    *ngIf="isImageDisplayed"
                    title="{{product.productName}}"
