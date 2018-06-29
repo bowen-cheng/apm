@@ -80,16 +80,21 @@ export class ProductListComponent implements OnInit {
     this.filteredProducts = this._filterText ? this.performFilter() : this.products;
   }
 
-  toggleImage(): void {
-    this.isImageDisplayed = !this.isImageDisplayed;
-  }
-
   ngOnInit(): void {
     console.log('Product list is initiated');
+  }
+
+  toggleImage(): void {
+    this.isImageDisplayed = !this.isImageDisplayed;
   }
 
   private performFilter(): Product[] {
     const lowercase = this._filterText.toLocaleLowerCase();
     return this.products.filter((value: Product) => value.productName.toLocaleLowerCase().indexOf(lowercase) !== -1);
+  }
+
+  onRatingClicked(message: string): void {
+    // The parameter here corresponds to the payload of the ratingClicked EventEmitter
+    alert(message);
   }
 }
