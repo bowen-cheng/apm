@@ -54,7 +54,10 @@
           <td>{{product.releaseDate}}</td>
           <td>{{product.price | currency}}</td>
           <td>
-            <pm-star [rating]="product.starRating"></pm-star>
+            <pm-star [rating]="product.starRating"
+                     (ratingClicked)="onRatingClicked($event)">
+              <!-- The variable name in the parameter must be '$event' here -->
+            </pm-star>
             <!-- Use property binding to inject property fo the outer component into the inner one -->
           </td>
         </tr>
