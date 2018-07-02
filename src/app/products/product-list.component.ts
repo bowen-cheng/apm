@@ -9,6 +9,7 @@ import { ProductService } from './product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  errorMessage: string;
   pageTitle: string = 'Product List';
   _filterText: string;
   imageWidth: number = 50;
@@ -32,9 +33,11 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this._productService.getProducts().subscribe((resp: Product[]) => {
-      this.products = resp;
-      this.filteredProducts = resp;
-    });
+          this.products = resp;
+          this.filteredProducts = resp;
+        },
+        err => this.errorMessage = <any>err
+    );
   }
 
   toggleImage(): void {
