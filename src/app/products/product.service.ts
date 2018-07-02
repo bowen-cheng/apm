@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 
 import { Product } from './product';
@@ -17,6 +19,13 @@ export class ProductService {
   constructor(private _http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this._productUrl);
+    return this._http.get<Product[]>(this._productUrl)
+        .do((data: Product[]) => console.log(`Data retrieved: ${JSON.stringify(data)}`))
+        .catch(this.errorHandler);
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    console.error(error.message);
+    return Observable.throw(error.message);
   }
 }
