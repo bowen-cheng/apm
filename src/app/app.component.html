@@ -2,6 +2,7 @@
   <a class="navbar-brand">{{title}}</a>
   <ul class="nav nav-pills">
     <!-- Note that the routerLink property takes an array of URLs as strings -->
+    <!-- The first element is the path, all other eements are route parameters -->
     <li><a class="navbar-link" [routerLink]="['/welcome']">Home</a></li>
     <li><a class="navbar-link" [routerLink]="['/products']">Product List</a></li>
   </ul>
