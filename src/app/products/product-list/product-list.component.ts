@@ -4,7 +4,8 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'pm-products',
+  // This component is now being routed rather than being nested, it no longer needs a selector
+  // selector: 'pm-products',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })

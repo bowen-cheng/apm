@@ -1,9 +1,13 @@
-<!--The whole content below can be removed with the new code.-->
-<div>
-  <h1>
-    {{title}}
-  </h1>
-  <div>
-    <pm-products></pm-products>
-  </div>
+<nav class="navbar navbar-default">
+  <a class="navbar-brand">{{title}}</a>
+  <ul class="nav nav-pills">
+    <!-- Note that the routerLink property takes an array of URLs as strings -->
+    <li><a class="navbar-link" [routerLink]="['/welcome']">Home</a></li>
+    <li><a class="navbar-link" [routerLink]="['/products']">Product List</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <!-- Whenever a component is activated, its view is inserted after the <router-outlet> tag -->
+  <router-outlet></router-outlet>
+  <!-- Code of component view will be inserted here by Angular Router module -->
 </div>
