@@ -1,3 +1,6 @@
-<p>
-  product-detail works!
-</p>
+<!-- The *ngIf statements ensures product is never null or undefined -->
+<div class="panel panel-primary" *ngIf="product">
+  <div class="panel-heading">
+    {{pageTitle + ": " + product.productName}}
+  </div>
+</div>
