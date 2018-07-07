@@ -49,7 +49,10 @@
             <!-- [propertyName]="..." This is property binding -->
             <!-- In general, property binding is preferred unless the evaluation is complex -->
           </td>
-          <td>{{product.productName}}</td>
+          <td>
+            <!-- The router productId here is retrieved form the component so we use [] property binding -->
+            <a [routerLink]="['/products', product.productId]">{{product.productName}}</a>
+          </td>
           <td>{{product.productCode | uppercase}}</td>
           <td>{{product.releaseDate}}</td>
           <td>{{product.price | currency}}</td>
