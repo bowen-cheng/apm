@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError, tap } from 'rxjs/operators';
 
 import { Product } from './product';
 
@@ -16,16 +15,19 @@ export class ProductService {
   // this path is relative to tsconfig.app.json
   private _productUrl: string = './api/products/products.json';
 
-  constructor(private _http: HttpClient) {}
+  static errorHandler(error: HttpErrorResponse) {
+    console.error(error.message);
+    return Observable.throw(error.message);
+  }
+
+  constructor(private _http: HttpClient) {
+  }
 
   getProducts(): Observable<Product[]> {
     return this._http.get<Product[]>(this._productUrl)
-        .do((data: Product[]) => console.log(`Data retrieved: ${JSON.stringify(data)}`))
-        .catch(this.errorHandler);
-  }
-
-  errorHandler(error: HttpErrorResponse) {
-    console.error(error.message);
-    return Observable.throw(error.message);
+      .pipe(
+        tap((data: Product[]) => console.log(`Data retrieved: ${JSON.stringify(data)}`)),
+        catchError(ProductService.errorHandler)
+      );
   }
 }
