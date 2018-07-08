@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductDetailGuard } from './products/product-detail/product-detail.guard';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { StarComponent } from './shared/star.component';
 
@@ -25,13 +26,17 @@ import { StarComponent } from './shared/star.component';
     RouterModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent },
+      {
+        path: 'products/:id',
+        canActivate: [ProductDetailGuard],
+        component: ProductDetailComponent
+      },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [ProductDetailGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
