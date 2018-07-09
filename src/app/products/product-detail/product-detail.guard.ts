@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 
-@Injectable()
+// Using the "providedIn" attribute of @Injectable decorator is now the recommended way of registering a service
+@Injectable({providedIn: 'root'})
 export class ProductDetailGuard implements CanActivate {
 
   constructor(private router: Router) {
