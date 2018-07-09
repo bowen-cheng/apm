@@ -36,7 +36,8 @@ import { StarComponent } from './shared/star.component';
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
-  providers: [ProductDetailGuard],
+  // Registering a service in Angular modules is deprecated since V6
+  // providers: [ProductDetailGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

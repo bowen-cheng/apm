@@ -6,7 +6,7 @@ import { ProductService } from './products/product.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   /*
-  - Providers are defined in Angular component or Angular module metadata
+  - Providers are defined in Angular component (or Angular module -> deprecated) metadata
   - ProductService is the provider since it returns ProductService class (Self is provider)
   - ProductService is now available to AppComponent and all of its nested components
   */
