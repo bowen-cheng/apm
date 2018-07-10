@@ -1,16 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailGuard } from './product-detail/product-detail.guard';
 import { ProductListComponent } from './product-list/product-list.component';
-import { StarComponent } from '../shared/star.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
     RouterModule,
     RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
@@ -19,12 +15,12 @@ import { StarComponent } from '../shared/star.component';
         canActivate: [ProductDetailGuard],
         component: ProductDetailComponent
       }
-    ])
+    ]),
+    SharedModule
   ],
   declarations: [
     ProductDetailComponent,
-    ProductListComponent,
-    StarComponent
+    ProductListComponent
   ]
 })
 export class ProductsModule {
