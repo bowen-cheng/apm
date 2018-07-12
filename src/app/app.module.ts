@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductsModule } from './products/products.module';
@@ -14,13 +14,9 @@ import { ProductsModule } from './products/products.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule,
-    RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ]),
-    ProductsModule
+    // ProductModule must be imported before AppRoutingModule for proper routing mapping
+    ProductsModule,
+    AppRoutingModule
   ],
   // Registering a service in Angular modules is deprecated since V6
   // providers: [ProductDetailGuard],
