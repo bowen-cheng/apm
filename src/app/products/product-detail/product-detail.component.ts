@@ -13,23 +13,29 @@ import { ProductService } from '../product.service';
 export class ProductDetailComponent implements OnInit {
 
   pageTitle: string = 'Product Detail';
+  errorMessage: string;
   product: Product;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private _productService: ProductService,
+              private productService: ProductService,
               private router: Router) {
   }
 
   ngOnInit() {
-    // The '+' symbol is a JS shortcut for converting strings to numbers
-    const id: number = +this.activatedRoute.snapshot.paramMap.get('id');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (!!id) {
+      // The '+' symbol is a JS shortcut for converting strings to numbers
+      this.getProduct(+id);
+    }
+  }
 
-    this._productService.getProducts().subscribe((products: Product[]) => {
-      this.product = products.filter(value => value.productId === id).pop();
-    });
+  getProduct(id: number) {
+    this.productService.getProduct(id).subscribe(
+      product => this.product = product,
+      error => this.errorMessage = <any>error);
   }
 
   onBack(): void {
-    this.router.navigate(['products']);
+    this.router.navigate(['/products']);
   }
 }
