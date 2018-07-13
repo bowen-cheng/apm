@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Product } from './product';
 
@@ -21,6 +21,11 @@ export class ProductService {
   }
 
   constructor(private _http: HttpClient) {
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this.getProducts().pipe(
+      map((products: Product[]) => products.find(p => p.productId === id)));
   }
 
   getProducts(): Observable<Product[]> {
