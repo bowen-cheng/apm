@@ -1,2 +1,2 @@
 ## APM
-Playground project for Angular 2 and up
+Notes for Angular

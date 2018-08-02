@@ -51,5 +51,8 @@
             (click)="onBack()">
       <i class="glyphicon glyphicon-chevron-left"></i>Back
     </button>
+    <button class="btn btn-primary" style="margin-left: 1rem; width: 80px"
+            [routerLink]="['/productEdit', product.productId]">Edit
+    </button>
   </div>
 </div>

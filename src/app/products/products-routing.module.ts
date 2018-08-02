@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailGuard } from './product-detail/product-detail.guard';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductEditGuard } from './product-edit/product-edit.guard';
 import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
@@ -12,6 +14,11 @@ import { ProductListComponent } from './product-list/product-list.component';
         path: 'products/:id',
         canActivate: [ProductDetailGuard],
         component: ProductDetailComponent
+      },
+      {
+        path: 'productEdit/:id',
+        canActivate: [ProductEditGuard],
+        component: ProductEditComponent
       }
     ])
   ],
