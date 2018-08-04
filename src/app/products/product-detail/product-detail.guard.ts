@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs/internal/Observable';
 
 // Using the "providedIn" attribute of @Injectable decorator is now the recommended way of registering a service
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ProductDetailGuard implements CanActivate {
 
   constructor(private router: Router) {
@@ -15,7 +15,7 @@ export class ProductDetailGuard implements CanActivate {
     // The URL of product details page consists of two parts: [0] is 'products', [1] is ':id'
     const productId = +next.url[1].path;
     if (isNaN(productId) || productId < 1 || productId > 10) {
-      alert('Invalid productId');
+      alert('Invalid id');
       this.router.navigate(['/products']);
       return false;
     }

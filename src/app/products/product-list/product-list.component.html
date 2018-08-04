@@ -50,8 +50,8 @@
             <!-- In general, property binding is preferred unless the evaluation is complex -->
           </td>
           <td>
-            <!-- The router productId here is retrieved form the component so we use [] property binding -->
-            <a [routerLink]="['/products', product.productId]">{{product.productName}}</a>
+            <!-- The router id here is retrieved form the component so we use [] property binding -->
+            <a [routerLink]="['/products', product.id]">{{product.productName}}</a>
           </td>
           <td>{{product.productCode | uppercase}}</td>
           <td>{{product.releaseDate}}</td>
@@ -64,7 +64,7 @@
             <!-- Use property binding to inject property fo the outer component into the inner one -->
           </td>
           <td>
-            <a class="btn btn-primary" [routerLink]="['/productEdit', product.productId]">Edit</a>
+            <a class="btn btn-primary" [routerLink]="['/productEdit', product.id]">Edit</a>
           </td>
         </tr>
         </tbody>

@@ -15,11 +15,11 @@ export class ProductListComponent implements OnInit {
   _filterText: string;
   imageWidth: number = 50;
   imageMargin: number = 2;
-  isImageDisplayed: boolean = false;
+  isImageDisplayed: boolean = true;
   filteredProducts: Product[];
   products: Product[];
 
-  constructor(private _productService: ProductService) {
+  constructor(private productService: ProductService) {
     // This constructor uses the TS short-hand syntax to declare/set _productService
   }
 
@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._productService.getProducts().subscribe((resp: Product[]) => {
+    this.productService.getProducts().subscribe((resp: Product[]) => {
         this.products = resp;
         this.filteredProducts = resp;
       },

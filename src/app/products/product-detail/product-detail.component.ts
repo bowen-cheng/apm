@@ -25,14 +25,11 @@ export class ProductDetailComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (!!id) {
       // The '+' symbol is a JS shortcut for converting strings to numbers
-      this.getProduct(+id);
+      this.productService.getProduct(+id).subscribe(
+        product => this.product = product,
+        error => this.errorMessage = <any>error
+      );
     }
-  }
-
-  getProduct(id: number) {
-    this.productService.getProduct(id).subscribe(
-      product => this.product = product,
-      error => this.errorMessage = <any>error);
   }
 
   onBack(): void {
