@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -71,7 +71,7 @@ export class ProductService {
     );
   }
 
-  deleteProduct(id: number): Observable<Product> {
+  deleteProduct(id: number): Observable<Response> {
     const url = `${this.productUrl}/${id}`;
 
     return this.http.delete(url, this.options).pipe(
@@ -89,6 +89,8 @@ export class ProductService {
 
   private createProduct(product: Product): Observable<Product> {
     product.id = undefined;
+
+    // post method is NOT idempotent: issuing multiple identical requests results in multiple DIFFERENT results
     return this.http.post(this.productUrl, product, this.options).pipe(
       map(ProductService.extractData),
       tap(data => console.log('createProduct: ' + JSON.stringify(data))),
@@ -98,6 +100,8 @@ export class ProductService {
 
   private updateProduct(product: Product): Observable<Product> {
     const url = `${this.productUrl}/${product.id}`;
+
+    // put method is idempotent: issuing multiple identical requests results in the SAME result
     return this.http.put(url, product, this.options).pipe(
       map(() => product),
       tap(data => console.log('updateProduct: ' + JSON.stringify(data))),

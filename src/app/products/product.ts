@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: number; // This field must be 'id' for in-memory API to work with get by id
   productName: string;
   productCode: string;
   tags?: string[];

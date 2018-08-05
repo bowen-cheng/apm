@@ -55,7 +55,11 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    // Defining the form model (productForm)
     this.productForm = this.fb.group({
+      // For each FormControl, we can pass in an array of elements
+      // The first element of the array is the default value of each FormControl
+      // the second element is either a single validator or an array of validators
       productName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       productCode: ['', Validators.required],
       starRating: ['', NumberValidator.range(1, 5)],
@@ -63,13 +67,11 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
       description: ''
     });
 
-    /* The snapshot approach retrieves the initial value from the route (URL) */
+    // The snapshot approach retrieves the initial value from the route (URL)
     // this.id = +this.route.snapshot.params['id'];
 
-    /*
-    If the user select a another product while on this page, the id will then change. Therefore, we use the observable
-    approach. We will always have the latest ID.
-    */
+    // If the user select a another product while on this page, the id will then change. Therefore, we use the observable
+    // approach. We will always have the latest ID.
     this.sub = this.route.params.subscribe(
       params => { this.getProductById(+params['id']); }
     );
@@ -91,10 +93,17 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  /**
+   * Duplicating elements in the FormArray is as simple as pushing new FormControl onto the FormArray element
+   * The new FormControl element can be totally different elements
+   */
   addTag(): void {
     this.tags.push(new FormControl());
   }
 
+  /**
+   * Removal of elements from the FormArray is reflected on the template
+   */
   deleteTag(i: number): void {
     this.tags.removeAt(i);
   }
@@ -108,6 +117,7 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onProductRetrieved(product: Product): void {
     if (this.productForm) {
+      // reset() function resets all states and flags
       this.productForm.reset();
     }
     this.product = product;
@@ -118,7 +128,8 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
       this.pageTitle = `Edit Product: ${this.product.productName}`;
     }
 
-    // Update the data on the form
+    // setValue(...) requires us to update all fields in the form
+    // patchValue(...) allows us to only update a subset of fields in the form
     this.productForm.patchValue({
       productName: this.product.productName,
       productCode: this.product.productCode,
