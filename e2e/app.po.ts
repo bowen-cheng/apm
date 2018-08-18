@@ -6,6 +6,6 @@ export class APMPage {
   }
 
   getParagraphText() {
-    return element(by.css('pm-root h1')).getText();
+    return element(by.css('.panel-heading')).getText();
   }
 }
