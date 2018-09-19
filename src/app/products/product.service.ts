@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -17,11 +17,6 @@ export class ProductService {
   private productUrl: string = 'api/products';
 
   options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-
-  static errorHandler(error: HttpErrorResponse) {
-    console.error(error.message);
-    return throwError(error.message);
-  }
 
   static extractData(response: Product[]): Product[] {
     return response || [];
@@ -67,7 +62,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.productUrl).pipe(
       map(ProductService.extractData),
       tap((data: Product[]) => console.log(`Data retrieved: ${JSON.stringify(data)}`)),
-      catchError(ProductService.errorHandler)
+      catchError(ProductService.handleError)
     );
   }
 
